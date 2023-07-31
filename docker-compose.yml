@@ -1,0 +1,101 @@
+version: '3.9'
+
+services:
+  # rabbitmq:
+  #   image: rabbitmq:3-management-alpine
+  #   container_name: 'rabbitmq'
+  #   ports:
+  #     - 5672:5672
+  #     - 15672:15672
+  billing-service:
+    build:
+      context: ./billing-service
+    # depends_on:
+    #   - rabbitmq
+    ports:
+      - "5004:5004"
+  data-service:
+    build:
+      context: ./data-service
+    # depends_on:
+    #   - rabbitmq
+    ports:
+      - "5001:5001"
+  shipping-service:
+    build:
+      context: ./shipping-service
+    # depends_on:
+    #   - rabbitmq
+    ports:
+      - "5002:5002"
+  users-service:
+    build:
+      context: ./users-service
+    # depends_on:
+    #   - rabbitmq
+    ports:
+      - "5003:5003"
+  webhook-service:
+    build:
+      context: ./webhook-service
+    # depends_on:
+    #   - rabbitmq
+    ports:
+      - "5005:5005"
+
+# ------------------------------- EOF
+# volumes:
+#     - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+#     - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+# networks:
+#     - rabbitmq_go_net
+# volumes:
+#   lib_data:
+#     driver: local
+#     driver_opts:
+#       type: 'none'
+#       o: 'bind'
+#       device: './lib'
+# services:
+#   billing-service:
+#     command: sh -c "ls -li && cd ./lib && ls -li"
+#     build:
+#       context: ./billing-service
+#       dockerfile: Dockerfile
+
+# services:
+#   billing-service:
+#     command: sh -c "ls -li && cd ./lib && ls -li"
+#     build:
+#       context: ./billing-service
+#       dockerfile: Dockerfile
+
+# services:
+#   billing:
+#     build: ./billing-service
+#     entrypoint: entrypoint.sh
+#     command: sh -c "pwd && ls -li"
+#     # build:
+#     #   context: ./billing-service
+#     #   dockerfile: Dockerfile
+#     #   args:
+#     #     - LIB_DIR=./lib  
+#     # command: sh -c "pwd && ls -li"
+#     ports:
+#       - "5004:5004"
+#     # build: ./billing-service
+#     # command: sh -c "cp -r /lib ./app && npm install --omit=dev"
+#     # ports:
+#     #   - "5004:5004"
+#   # inventory:
+#   #   build: ./inventory-service
+#   #   ports:
+#   #     - "5002:5002"
+#   # shipping:
+#   #   build: ./shipping-service
+#   #   ports:
+#   #     - "5009:5009"
+#   # users:
+#   #   build: ./users-service
+#   #   ports:
+#   #     - "5001:5001"
