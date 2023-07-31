@@ -1,6 +1,6 @@
 # Assignment PartA
-Goto PartA
-Read __microservice-running.md__
+Goto PartA, 
+Follow instructions in **Readme.md**
 
 # Assignment Part B
 Goto PartB
